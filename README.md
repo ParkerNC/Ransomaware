@@ -1,1 +1,1 @@
-# Ransomaware
+# RansomAware
