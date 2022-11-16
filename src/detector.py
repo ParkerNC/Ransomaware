@@ -11,10 +11,13 @@ class Counter():
 
     def run(self) -> None:
 
+        maxes = []
         names = ["read_count", "write_count", "read_bytes", "write_bytes", "read_time", "write_time", "read_merged_count", "write_merged_count", "busy_time"]
         for item in self.count():
+            maxes.append(0)
             self.data.append([item])
         
+
         while(1):
             counts = self.count()
             print(counts)
@@ -23,11 +26,14 @@ class Counter():
 
             with open(self.file + '.csv', "w") as avgfile:
                 for i, avg in enumerate(self.data):
-                    a = 0
-                    for x in avg:
-                        a += x
-                    a /= len(avg)
-                    avgfile.write("{}, {:.2f}\n".format(names[i], a))
+                    d = avg[-1]
+                    d -= avg[0]
+                    if maxes[i] < d:
+                        maxes[i] = d
+                    avgfile.write("{}, {:.2f}\n".format(names[i], d))
+
+                for m in maxes:
+                    avgfile.write("MAX, {}, {:.2f}\n".format(names[i], m))
 
             time.sleep(1)
 
