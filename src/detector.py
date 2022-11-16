@@ -17,6 +17,11 @@ class Counter():
             maxes.append(0)
             self.data.append([item])
         
+        with open(self.file + ".csv", 'a') as totfile:
+            for name in names:
+                totfile.write("{}, ".format(name))
+
+            totfile.write('\n')
 
         while(1):
             counts = self.count()
@@ -24,7 +29,7 @@ class Counter():
 
             self.update(counts)
 
-            with open(self.file + '.csv', "w") as avgfile:
+            with open("max_" + self.file + '.csv', "w") as avgfile:
                 for i, avg in enumerate(self.data):
                     d = avg[-1]
                     d -= avg[0]
@@ -32,8 +37,14 @@ class Counter():
                         maxes[i] = d
                     avgfile.write("{}, {:.2f}\n".format(names[i], d))
 
-                for m in maxes:
+                for i, m in enumerate(maxes):
                     avgfile.write("MAX, {}, {:.2f}\n".format(names[i], m))
+
+            with open(self.file + ".csv", 'a') as totfile:
+                for i, data in enumerate(counts):
+                    totfile.write("{:.2f}, ".format(data))
+
+                totfile.write('\n')
 
             time.sleep(1)
 
