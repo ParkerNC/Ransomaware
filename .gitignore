@@ -4,3 +4,10 @@
 *.csv
 
 *data
+*.png
+Test
+*.exe
+*.7z
+*.crt
+*.zip
+tmp
