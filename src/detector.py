@@ -60,7 +60,7 @@ class Counter():
                 totfile.write('\n')
 
             if self.check_mal(maxes):
-                print("Malicious Behavior Detected")
+                print("Malicious Behavior Detected: Disconnect from the internet and shutdown the device.")
 
             time.sleep(1)
 
@@ -85,9 +85,7 @@ class Counter():
     def check_mal(self, maxes: list) -> bool:
         for i in range(0, 4):
             if maxes[i] > self.bases[i]:
-                print(maxes[i]/self.bases[i])
                 if maxes[i]/self.bases[i] > 14:
-                    print((maxes[0]+1)/(maxes[1]+1))
                     if ((maxes[0]+1)/(maxes[1]+1) < 1.8) and ((maxes[0]+1)/(maxes[1]+1) > 0.3):
                         return True
         return False
